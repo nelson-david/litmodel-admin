@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 
 export const ADMIN_TOKEN = "thisistheadmintoken";
 // export const API_URL = "http://localhost:6500/api/v1";
-export const API_URL = "https://litmodel-server.onrender.com/api/v1";
+export const API_URL = "https://api-v1.litmodelmanagement.com/api/v1";
 
 export const successToast = (success: string) =>
 	toast.success(`${success}`, {
