@@ -1,0 +1,291 @@
+@media (max-width: 1099.5px) {
+    .newProductSection {
+        padding: 50px 60px;
+        padding-left: 30px;
+    }
+    .newProductSection .newProductFormDiv {
+        border-radius: 10px;
+        padding: 50px;
+    }
+}
+@media (max-width: 1010.5px) {
+    /* Custom Sidebar */
+    .customSidebar {
+        height: 100vh;
+        padding: 10px 0px;
+    }
+    .customSidebar ul {
+        padding: 10px;
+    }
+    /* End of custom sidebar */
+}
+
+@media (max-width: 991.5px) {
+    .customSidebar {
+        width: 80px;
+    }
+    .customSidebar ul li a i {
+        display: none;
+    }
+    .newProductSection {
+        padding: 50px 40px;
+        padding-left: 0px;
+    }
+    .newProductSection .newProductFormDiv {
+        border-radius: 10px;
+        padding: 40px;
+    }
+}
+
+@media (max-width: 891.5px) {
+    section .addNewDiv .customInput {
+        width: 250px;
+        height: 45px;
+    }
+    section .addNewDiv a {
+        border-radius: 3px;
+        height: 40px;
+        padding: 5px 15px;
+        font-size: 12px;
+        font-weight: 500 !important;
+        letter-spacing: -0.2px;
+    }
+}
+
+@media (max-width: 791.5px) {
+    .orderSection {
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 730.5px) {
+    .customNav ul li a i {
+        display: none;
+    }
+}
+
+@media (max-width: 691.5px) {
+    .dashboardSection {
+        margin-left: 0px;
+    }
+    .orderSection {
+        margin-left: -30px;
+    }
+    section .addNewDiv form {
+        display: block;
+    }
+    section .addNewDiv .customInput {
+        width: 300px;
+    }
+    section .addNewDiv select {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 620.5px) {
+    .customNav {
+        background-color: var(--white);
+        margin: 0px;
+        padding: 10px 10px;
+    }
+    .customNav ul li {
+        font-weight: 700 !important;
+        font-size: 16px;
+        letter-spacing: -0.7px;
+        padding: 5px 10px;
+    }
+    .App {
+        padding-top: 15px;
+    }
+    .newProductSection {
+        padding: 20px 25px;
+        padding-left: 0px;
+    }
+    .newProductSection .newProductFormDiv {
+        border-radius: 5px;
+        padding: 30px;
+    }
+    .orderSection {
+        margin-left: -20px;
+    }
+}
+
+@media (max-width: 575.5px) {
+    #sidebarCol {
+        display: none;
+    }
+    .customNav {
+        display: none;
+    }
+    .bottomNav {
+        display: block;
+    }
+    .categorySection,
+    .newProductSection {
+        padding: 15px 20px;
+    }
+    .App {
+        padding-top: 15px;
+        padding-bottom: 100px;
+    }
+    .newProductSection .newProductFormDiv {
+        border-radius: 5px;
+        padding: 30px;
+    }
+    .dashboardSection {
+        padding: 15px 10px;
+    }
+    .orderSection {
+        margin-left: 0px;
+        padding: 25px 15px;
+    }
+}
+
+@media (max-width: 475.5px) {
+    .customNav ul li {
+        font-size: 15px;
+        letter-spacing: -0.5px;
+        padding: 5px 10px;
+    }
+    .categorySection {
+        padding: 10px;
+    }
+    .categorySection .categoryList .singleCategoryCard {
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .categorySection .categoryList .singleCategoryCard .imageDiv img {
+        height: 160px;
+        border-radius: 4px;
+    }
+    .dashboardSection
+        .dashboardStatsContent
+        .singleStatContainer
+        .singleStatCard {
+        border-radius: 7px;
+        padding: 15px;
+    }
+    .dashboardSection
+        .dashboardStatsContent
+        .singleStatContainer
+        .singleStatCard
+        h2 {
+        font-size: 25px;
+    }
+    .dashboardSection
+        .dashboardStatsContent
+        .singleStatContainer
+        .singleStatCard
+        p {
+        font-size: 13px;
+    }
+    .orderSection .orderNav ul li {
+        padding: 8px 15px;
+        border-radius: 3px;
+        font-size: 13px;
+    }
+    .orderSection .orderList {
+        padding: 30px 5px;
+    }
+    .orderSection .orderList .orderCard {
+        padding: 10px;
+        border-radius: 6px;
+    }
+    .carousel .carousel-images {
+        border-radius: 5px;
+    }
+    .carousel .carousel-images img {
+        border-radius: 5px !important;
+    }
+    .orderSection .orderList .orderCard h2.cardTitle {
+        font-size: 18px;
+        padding: 15px 5px;
+        padding-bottom: 5px;
+    }
+    .orderSection .orderList .orderCard p.cardSubtitle {
+        font-size: 14px;
+    }
+    .orderSection .orderList .orderCard .shippingDetails {
+        background-color: #f2f2f2;
+        padding: 20px 15px;
+        border-radius: 10px;
+    }
+    .orderSection .orderList .orderCard .shippingDetails ul li {
+        font-size: 12px;
+    }
+    .orderSection .orderList .orderCard .shippingDetails ul li span {
+        font-size: 13px;
+    }
+    .orderSection
+        .orderList
+        .orderCard
+        .shippingDetails
+        .orderCardFooter
+        button {
+        width: 120px;
+        height: 35px;
+        font-size: 11px;
+    }
+    section .addNewDiv .customInput {
+        width: 260px;
+    }
+    section .addNewDiv select {
+        margin-bottom: 15px;
+    }
+    section .addNewDiv {
+        display: block;
+    }
+}
+
+@media (max-width: 425.5px) {
+    .categorySection {
+        padding: 15px 20px;
+    }
+    .categoriesCol {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    .newProductSection {
+        padding: 0px;
+    }
+    .newProductSection .newProductFormDiv {
+        border-radius: 0px;
+        padding: 20px;
+    }
+    .orderSection {
+        padding: 15px 12px;
+    }
+    .orderSection .orderNav ul li {
+        padding: 6px 11px;
+    }
+    .orderSection .orderList {
+        padding: 20px 0px;
+    }
+}
+
+@media (max-width: 400.5px) {
+    .categorySection {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 390.5px) {
+    section .addNewDiv .customInput {
+        width: 100%;
+    }
+}
+
+@media (max-width: 355.5px) {
+    .dashboardSection {
+        padding: 15px 10px;
+    }
+    .dashboardSection .dashboardStatsContent .singleStatContainer {
+        padding: 15px 5px;
+    }
+    .singleStatCol {
+        max-width: 100% !important;
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+}

@@ -1,0 +1,83 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-display: "Archivo Black", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
+  --color-lit-blue: #2563eb;
+  --color-lit-yellow: #ffd900;
+  --shadow-neo: 4px 4px 0px 0px rgba(0,0,0,1);
+  --shadow-neo-hover: 2px 2px 0px 0px rgba(0,0,0,1);
+  --shadow-neo-lg: 8px 8px 0px 0px rgba(0,0,0,1);
+  --animate-shimmer: shimmer 1.5s infinite;
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+body {
+  background-color: #f8f8f8;
+  color: #000000;
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+.neo-box {
+  background-color: white;
+  border: 3px solid black;
+  box-shadow: var(--shadow-neo);
+  transition: all 0.2s ease;
+}
+
+.neo-box:hover {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-neo-hover);
+}
+
+.neo-button {
+  background-color: var(--color-lit-blue);
+  color: white;
+  border: 3px solid black;
+  box-shadow: var(--shadow-neo);
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.1s ease;
+}
+
+.neo-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-neo-hover);
+}
+
+.neo-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.neo-input {
+  border: 3px solid black;
+  box-shadow: var(--shadow-neo-hover);
+  padding: 0.5rem 1rem;
+  width: 100%;
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.neo-input::placeholder{
+  color: rgba(0, 0, 0, 0.3)
+}
+
+.neo-input:focus {
+  outline: none;
+  box-shadow: var(--shadow-neo);
+}
