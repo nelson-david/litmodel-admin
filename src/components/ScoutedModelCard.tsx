@@ -18,20 +18,49 @@ const ScoutedModelCard: React.FC<ScoutedModelCardProps> = ({
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [processingDelete, setProcessingDelete] = useState(false);
+	const [touchStart, setTouchStart] = useState<number | null>(null);
+	const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+	// Minimum swipe distance (in px)
+	const minSwipeDistance = 50;
 
 	const images =
 		model.polaroid && model.polaroid.length > 0
 			? model.polaroid
 			: ["https://placehold.co/400x500"];
 
-	const nextImage = (e: React.MouseEvent) => {
-		e.stopPropagation();
+	const nextImage = (e?: React.MouseEvent) => {
+		e?.stopPropagation();
 		setCurrentImageIndex((prev) => (prev + 1) % images.length);
 	};
 
-	const prevImage = (e: React.MouseEvent) => {
-		e.stopPropagation();
+	const prevImage = (e?: React.MouseEvent) => {
+		e?.stopPropagation();
 		setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+	};
+
+	const onTouchStart = (e: React.TouchEvent) => {
+		setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
+		setTouchStart(e.targetTouches[0].clientX);
+	};
+
+	const onTouchMove = (e: React.TouchEvent) =>
+		setTouchEnd(e.targetTouches[0].clientX);
+
+	const onTouchEnd = () => {
+		if (!touchStart || !touchEnd) return;
+		const distance = touchStart - touchEnd;
+		const isLeftSwipe = distance > minSwipeDistance;
+		const isRightSwipe = distance < -minSwipeDistance;
+		if (isLeftSwipe || isRightSwipe) {
+			if (isLeftSwipe) {
+				// Next image
+				nextImage();
+			} else {
+				// Prev image
+				prevImage();
+			}
+		}
 	};
 
 	const handleDelete = () => {
@@ -71,7 +100,12 @@ const ScoutedModelCard: React.FC<ScoutedModelCardProps> = ({
 	return (
 		<div className="neo-box p-3 bg-white flex flex-col h-full relative group">
 			{/* Image Section */}
-			<div className="relative aspect-3/4 border-2 border-black mb-4 overflow-hidden bg-gray-100">
+			<div
+				className="relative aspect-3/4 border-2 border-black mb-4 overflow-hidden bg-gray-100"
+				onTouchStart={onTouchStart}
+				onTouchMove={onTouchMove}
+				onTouchEnd={onTouchEnd}
+			>
 				<CustomImage
 					key={currentImageIndex} // Key forces re-render for shimmer on change if needed, or just let src change
 					src={images[currentImageIndex]}
@@ -98,14 +132,14 @@ const ScoutedModelCard: React.FC<ScoutedModelCardProps> = ({
 						<button
 							type="button"
 							onClick={prevImage}
-							className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors z-20 opacity-0 group-hover:opacity-100 cursor-pointer"
+							className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors z-20 opacity-100 md:opacity-0 md:group-hover:opacity-100 cursor-pointer"
 						>
 							<HiChevronLeft />
 						</button>
 						<button
 							type="button"
 							onClick={nextImage}
-							className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors z-20 opacity-0 group-hover:opacity-100 cursor-pointer"
+							className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors z-20 opacity-100 md:opacity-0 md:group-hover:opacity-100 cursor-pointer"
 						>
 							<HiChevronRight />
 						</button>
