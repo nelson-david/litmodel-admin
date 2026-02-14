@@ -4,118 +4,149 @@ import { API_URL, ADMIN_TOKEN, errorToast } from "../config";
 import axios from "axios";
 
 interface ImageUploadProps {
-    images: string[];
-    setImages: (images: string[]) => void;
-    caption?: string;
-    maxFiles?: number;
-    allowMultiple?: boolean;
+	images: string[];
+	setImages: (images: string[]) => void;
+	caption?: string;
+	maxFiles?: number;
+	allowMultiple?: boolean;
+	onUploadStart?: () => void;
+	onUploadEnd?: () => void;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
-    images,
-    setImages,
-    caption = "Upload images",
-    // maxFiles = 10,
-    allowMultiple = true,
+	images,
+	setImages,
+	caption = "Upload images",
+	// maxFiles = 10,
+	allowMultiple = true,
+	onUploadStart,
+	onUploadEnd,
 }) => {
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const [uploading, setUploading] = useState(false);
+	const fileInputRef = useRef<HTMLInputElement>(null);
+	const [uploading, setUploading] = useState(false);
+	const [pendingImagesCount, setPendingImagesCount] = useState(0);
 
-    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        if (!files || files.length === 0) return;
+	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		const files = e.target.files;
+		if (!files || files.length === 0) return;
 
-        setUploading(true);
-        const formData = new FormData();
-        Array.from(files).forEach((file) => {
-            formData.append("images", file);
-        });
+		setUploading(true);
+		setPendingImagesCount(files.length);
+		if (onUploadStart) onUploadStart();
 
-        try {
-            const response = await axios.post(`${API_URL}/upload`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "x-auth-token": ADMIN_TOKEN,
-                },
-            });
+		const formData = new FormData();
+		Array.from(files).forEach((file) => {
+			formData.append("images", file);
+		});
 
-            if (response.data && response.data.data) {
-                const newUrls = response.data.data;
-                if (allowMultiple) {
-                    setImages([...images, ...newUrls]);
-                } else {
-                    setImages([newUrls[0]]); // Replace if single file
-                }
-            }
-        } catch (error: any) {
-            console.error("Upload error:", error);
-            errorToast(error.response?.data?.message || "Failed to upload images");
-        } finally {
-            setUploading(false);
-            if (fileInputRef.current) {
-                fileInputRef.current.value = "";
-            }
-        }
-    };
+		try {
+			const response = await axios.post(`${API_URL}/upload`, formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+					"x-auth-token": ADMIN_TOKEN,
+				},
+			});
 
-    const removeImage = (indexToRemove: number) => {
-        setImages(images.filter((_, index) => index !== indexToRemove));
-    };
+			if (response.data && response.data.data) {
+				const newUrls = response.data.data;
+				if (allowMultiple) {
+					setImages([...images, ...newUrls]);
+				} else {
+					setImages([newUrls[0]]); // Replace if single file
+				}
+			}
+		} catch (error: any) {
+			console.error("Upload error:", error);
+			errorToast(error.response?.data?.message || "Failed to upload images");
+		} finally {
+			setUploading(false);
+			setPendingImagesCount(0);
+			if (onUploadEnd) onUploadEnd();
+			if (fileInputRef.current) {
+				fileInputRef.current.value = "";
+			}
+		}
+	};
 
-    return (
-        <div className="w-full">
-             <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                className="hidden"
-                multiple={allowMultiple}
-                accept="image/*"
-            />
-            
-            {/* Upload Area */}
-            <button 
-                type="button"
-                onClick={() => !uploading && fileInputRef.current?.click()}
-                className={`neo-box w-full border-dotted! bg-lit-blue/5 hover:bg-lit-blue/10 transition-colors p-8 flex flex-col items-center justify-center cursor-pointer min-h-[200px] ${uploading ? "opacity-50 cursor-not-allowed" : ""}`}
-            >
-                {uploading ? (
-                    <div className="flex flex-col items-center">
-                        <div className="w-8 h-8 border-4 border-lit-blue border-t-transparent rounded-full animate-spin mb-2"></div>
-                        <span className="font-bold text-sm uppercase">Uploading...</span>
-                    </div>
-                ) : (
-                    <>
-                        <HiCloudUpload className="text-4xl mb-2" />
-                        <span className="font-bold text-sm uppercase">{caption}</span>
-                        <span className="text-xs text-gray-500 mt-1">JPG, PNG up to 10MB each</span>
-                    </>
-                )}
-            </button>
+	const removeImage = (indexToRemove: number) => {
+		setImages(images.filter((_, index) => index !== indexToRemove));
+	};
 
-            {/* Preview Area */}
-            {images.length > 0 && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-                    {images.map((url, index) => (
-                        <div key={index} className="relative aspect-3/4 group neo-box p-1 bg-white">
-                            <img 
-                                src={url} 
-                                alt={`Uploaded ${index}`} 
-                                className="w-full h-full object-cover border-2 border-black" 
-                            />
-                            <button
-                                type="button"
-                                onClick={() => removeImage(index)}
-                                className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white border-2 border-black flex items-center justify-center shadow-neo-sm hover:scale-110 transition-transform"
-                            >
-                                <HiX className="w-4 h-4" />
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
+	return (
+		<div className="w-full">
+			<input
+				type="file"
+				ref={fileInputRef}
+				onChange={handleFileChange}
+				className="hidden"
+				multiple={allowMultiple}
+				accept="image/*"
+			/>
+
+			{/* Upload Area */}
+			<button
+				type="button"
+				onClick={() => !uploading && fileInputRef.current?.click()}
+				className={`neo-box w-full border-dotted! bg-lit-blue/5 hover:bg-lit-blue/10 transition-colors p-8 flex flex-col items-center justify-center cursor-pointer min-h-[200px] ${uploading ? "opacity-50 cursor-not-allowed" : ""}`}
+			>
+				{uploading ? (
+					<div className="flex flex-col items-center">
+						<div className="w-8 h-8 border-4 border-lit-blue border-t-transparent rounded-full animate-spin mb-2"></div>
+						<span className="font-bold text-sm uppercase">
+							Uploading {pendingImagesCount} Image
+							{pendingImagesCount > 1 ? "s" : ""}...
+						</span>
+					</div>
+				) : (
+					<>
+						<HiCloudUpload className="text-4xl mb-2" />
+						<span className="font-bold text-sm uppercase">{caption}</span>
+						<span className="text-xs text-gray-500 mt-1">
+							JPG, PNG up to 10MB each
+						</span>
+					</>
+				)}
+			</button>
+
+			{/* Preview Area */}
+			{(images.length > 0 || uploading) && (
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+					{images.map((url, index) => (
+						<div
+							key={index}
+							className="relative aspect-3/4 group neo-box p-1 bg-white"
+						>
+							<img
+								src={url}
+								alt={`Uploaded ${index}`}
+								className="w-full h-full object-cover border-2 border-black"
+							/>
+							<button
+								type="button"
+								onClick={() => removeImage(index)}
+								className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white border-2 border-black flex items-center justify-center shadow-neo-sm hover:scale-110 transition-transform"
+							>
+								<HiX className="w-4 h-4" />
+							</button>
+						</div>
+					))}
+
+					{/* Shimmer placeholders for pending images */}
+					{uploading &&
+						[...Array(pendingImagesCount)].map((_, i) => (
+							<div
+								key={`param-${i}`}
+								className="relative aspect-3/4 neo-box p-1 bg-white animate-pulse"
+							>
+								<div className="w-full h-full bg-gray-200 border-2 border-gray-300 flex items-center justify-center">
+									<HiCloudUpload className="text-gray-400 text-2xl animate-bounce" />
+								</div>
+							</div>
+						))}
+				</div>
+			)}
+		</div>
+	);
 };
 
 export default ImageUpload;
