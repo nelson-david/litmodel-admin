@@ -121,17 +121,17 @@ const EditModel = ({
 	return (
 		<PageLayout>
 			{redirect ? <Navigate to="/models" /> : ""}
-			<div className="max-w-5xl p-16 mb-20 mx-auto bg-white border-[1.5px] border-black shadow-neo-lg">
+			<div className="max-w-5xl p-4 sm:p-8 md:p-16 mb-20 mx-auto bg-white border-[1.5px] border-black shadow-neo-lg">
 				<div className="flex justify-between items-center mb-8 border-b pb-6">
 					<div className="flex flex-col gap-1">
-						<h1 className="text-4xl font-light uppercase tracking-tighter">
+						<h1 className="text-3xl sm:text-4xl font-light uppercase tracking-tighter">
 							Edit Model
 						</h1>
-						<p className="text-gray-500 font-medium">
+						<p className="text-gray-500 font-medium text-sm sm:text-base">
 							Update model details and portfolio.
 						</p>
 					</div>
-					<div className="bg-lit-yellow shadow-neo border-2 border-black px-3 py-1 font-black text-xs shadow-neo-sm mt-auto">
+					<div className="bg-lit-yellow shadow-neo border-2 border-black px-2.5 sm:px-3 py-1 font-black text-[11px] sm:text-xs shadow-neo-sm mb-auto sm:mt-auto">
 						STEP 1 OF 1
 					</div>
 				</div>
@@ -140,17 +140,17 @@ const EditModel = ({
 					{/* 01 GENERAL INFORMATION */}
 					<section>
 						<div className="flex items-center gap-2 mb-6">
-							<span className="bg-black text-white font-black text-sm px-2 py-1">
+							<span className="bg-black text-white font-black text-xs sm:text-sm px-2 py-1">
 								01
 							</span>
-							<h2 className="font-medium tracking-tight uppercase text-xl">
+							<h2 className="font-medium tracking-tight uppercase text-lg sm:text-xl">
 								General Information
 							</h2>
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="modelName"
 								>
 									Model Name
@@ -158,7 +158,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="modelName"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									placeholder="e.g. Jane Doe"
 									value={modelName}
 									onChange={(e) => setModelName(e.target.value)}
@@ -167,7 +167,7 @@ const EditModel = ({
 							</div>
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="shortDescription"
 								>
 									Short Description
@@ -175,7 +175,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="shortDescription"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									placeholder="e.g. Editorial & High Fashion"
 									value={shortDescription}
 									onChange={(e) => setShortDescription(e.target.value)}
@@ -188,17 +188,17 @@ const EditModel = ({
 					{/* 02 MODEL MEASUREMENTS */}
 					<section>
 						<div className="flex items-center gap-2 mb-6">
-							<span className="bg-black text-white font-black text-sm px-2 py-1">
+							<span className="bg-black text-white font-black text-xs sm:text-sm px-2 py-1">
 								02
 							</span>
-							<h2 className="font-medium tracking-tight uppercase text-xl">
+							<h2 className="font-medium tracking-tight uppercase text-lg sm:text-xl">
 								Model Measurements
 							</h2>
 						</div>
 						<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="height"
 								>
 									Height (cm)
@@ -206,7 +206,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="height"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									value={measurement.height}
 									onChange={(e) =>
 										setMeasurement({ ...measurement, height: e.target.value })
@@ -216,7 +216,7 @@ const EditModel = ({
 							</div>
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="waist"
 								>
 									Waist (cm)
@@ -224,7 +224,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="waist"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									value={measurement.waist}
 									onChange={(e) =>
 										setMeasurement({ ...measurement, waist: e.target.value })
@@ -234,7 +234,7 @@ const EditModel = ({
 							</div>
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="eye"
 								>
 									Eye (Color)
@@ -242,7 +242,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="eye"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									value={measurement.eye}
 									onChange={(e) =>
 										setMeasurement({ ...measurement, eye: e.target.value })
@@ -252,7 +252,7 @@ const EditModel = ({
 							</div>
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="hip"
 								>
 									Hip (cm)
@@ -260,7 +260,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="hip"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									value={measurement.hip}
 									onChange={(e) =>
 										setMeasurement({ ...measurement, hip: e.target.value })
@@ -270,7 +270,7 @@ const EditModel = ({
 							</div>
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="dressSize"
 								>
 									Dress Size
@@ -278,7 +278,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="dressSize"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									value={measurement.dressSize}
 									onChange={(e) =>
 										setMeasurement({
@@ -291,7 +291,7 @@ const EditModel = ({
 							</div>
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="shoe"
 								>
 									Shoe Size
@@ -299,7 +299,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="shoe"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									value={measurement.shoe}
 									onChange={(e) =>
 										setMeasurement({ ...measurement, shoe: e.target.value })
@@ -309,7 +309,7 @@ const EditModel = ({
 							</div>
 							<div className="col-span-2">
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="chestBust"
 								>
 									Chest/Bust (cm)
@@ -317,7 +317,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="chestBust"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									value={measurement.chestBust}
 									onChange={(e) =>
 										setMeasurement({
@@ -334,17 +334,17 @@ const EditModel = ({
 					{/* 03 PORTFOLIO */}
 					<section>
 						<div className="flex items-center gap-2 mb-6">
-							<span className="bg-black text-white font-black text-sm px-2 py-1">
+							<span className="bg-black text-white font-black text-xs sm:text-sm px-2 py-1">
 								03
 							</span>
-							<h2 className="font-medium tracking-tight uppercase text-xl">
+							<h2 className="font-medium tracking-tight uppercase text-lg sm:text-xl">
 								Portfolio
 							</h2>
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="instagram"
 								>
 									Instagram Handle
@@ -352,7 +352,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="instagram"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									placeholder="@username"
 									value={portfolio.instagram}
 									onChange={(e) =>
@@ -363,7 +363,7 @@ const EditModel = ({
 							</div>
 							<div>
 								<label
-									className="block text-xs font-bold uppercase mb-2"
+									className="block text-[10px] sm:text-xs font-bold uppercase mb-2"
 									htmlFor="otherLink"
 								>
 									Other Link
@@ -371,7 +371,7 @@ const EditModel = ({
 								<input
 									type="text"
 									id="otherLink"
-									className="neo-input h-16 w-full"
+									className="neo-input h-16 w-full text-sm sm:text-base"
 									placeholder="https://"
 									value={portfolio.other}
 									onChange={(e) =>
@@ -394,18 +394,18 @@ const EditModel = ({
 					{/* 04 SETTINGS & POLAROIDS */}
 					<section>
 						<div className="flex items-center gap-2 mb-6">
-							<span className="bg-black text-white font-black text-sm px-2 py-1">
+							<span className="bg-black text-white font-black text-xs sm:text-sm px-2 py-1">
 								04
 							</span>
-							<h2 className="font-medium tracking-tight uppercase text-xl">
+							<h2 className="font-medium tracking-tight uppercase text-lg sm:text-xl">
 								Settings & Polaroids
 							</h2>
 						</div>
 
-						<div className="neo-box p-6 bg-white mb-6">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+						<div className="neo-box p-4 sm:p-6 bg-white mb-6">
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
 								<div>
-									<span className="block text-[10px] font-bold uppercase text-gray-400 mb-3 tracking-widest">
+									<span className="block text-[9px] sm:text-[10px] font-bold uppercase text-gray-400 mb-3 tracking-widest">
 										Classification
 									</span>
 									<div className="flex gap-6">
@@ -421,7 +421,7 @@ const EditModel = ({
 												checked={newFace}
 												onChange={() => setNewFace(!newFace)}
 											/>
-											<span className="font-bold text-xs uppercase">
+											<span className="font-bold text-[10px] sm:text-xs uppercase">
 												New Face
 											</span>
 										</label>
@@ -438,7 +438,7 @@ const EditModel = ({
 												checked={topModel}
 												onChange={() => setTopModel(!topModel)}
 											/>
-											<span className="font-bold text-xs uppercase">
+											<span className="font-bold text-[10px] sm:text-xs uppercase">
 												Top Model
 											</span>
 										</label>
@@ -446,7 +446,7 @@ const EditModel = ({
 								</div>
 
 								<div>
-									<span className="block text-[10px] font-bold uppercase text-gray-400 mb-3 tracking-widest">
+									<span className="block text-[9px] sm:text-[10px] font-bold uppercase text-gray-400 mb-3 tracking-widest">
 										Gender
 									</span>
 									<div className="flex gap-6">
@@ -469,7 +469,9 @@ const EditModel = ({
 													checked={gender === g}
 													onChange={() => setGender(g)}
 												/>
-												<span className="font-bold text-xs uppercase">{g}</span>
+												<span className="font-bold text-[10px] sm:text-xs uppercase">
+													{g}
+												</span>
 											</label>
 										))}
 									</div>
@@ -490,7 +492,7 @@ const EditModel = ({
 					<button
 						type="submit"
 						disabled={processing || uploadCounter > 0}
-						className="w-full neo-button bg-lit-blue text-white py-4 font-black uppercase tracking-widest text-lg hover:bg-lit-blue/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+						className="w-full neo-button bg-lit-blue text-white py-4 font-black uppercase tracking-widest text-sm sm:text-base hover:bg-lit-blue/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
 					>
 						{processing ? (
 							<ImSpinner8 className="animate-spin" />
